@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
@@ -20,7 +19,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -41,8 +40,19 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-        /**
-     * Create a new controller instance.
+    /**
+     * Interrogation du serveur distant de Connexion
+     *
+     * On se connecte au websocket qui va se connecter au serveur d'authentification et retourner un token valide
+     * en cas de connexion réussit.
+     *
+     * @bodyParam Email String required L'email de l'utilisateur
+     * @bodyParam Password String required Mot de passe de l'utilisateur
+     *
+     * @response {
+     *  "token": "token",
+     *  "token_expire": "14400"
+     * }
      *
      * @return void
      */
@@ -53,19 +63,19 @@ class LoginController extends Controller
         //$apiman = "Bearer {$this->accesstokenApi()}";
         $client = new Client();
         $response = $client->post('http://127.0.0.1:8888/api/login', [
-            'headers' => 
+            'headers' =>
             [
-                //'authorization' => $apiman, 
-                'content-type'  => 'application/json'
+                //'authorization' => $apiman,
+                'content-type' => 'application/json',
             ],
-            'json' => 
+            'json' =>
             [
                 'email' => $email,
-                'password' => $password
+                'password' => $password,
             ],
         ]);
         $data = json_decode((string) $response->getBody(), true);
-        if ($data['token_type']=="bearer") {
+        if ($data['token_type'] == "bearer") {
             session()->put('token', $data);
             return redirect('/');
         } else {

@@ -1,0 +1,40 @@
+{
+    "variables": [],
+    "info": {
+        "name": "Laravel API",
+        "_postman_id": "a7f4928f-bc01-4f92-817c-0b8092e7c769",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "general",
+            "description": "",
+            "item": [
+                {
+                    "name": "Interrogation du serveur distant de Connexion",
+                    "request": {
+                        "url": "http:\/\/localhost\/loginDistant",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"Email\": \"dignissimos\",\n    \"Password\": \"aliquid\"\n}"
+                        },
+                        "description": "On se connecte au websocket qui va se connecter au serveur d'authentification et retourner un token valide\nen cas de connexion r\u00e9ussit",
+                        "response": []
+                    }
+                }
+            ]
+        }
+    ]
+}

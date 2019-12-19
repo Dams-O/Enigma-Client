@@ -77,6 +77,20 @@
                 Cesar(data['chaine'],data['choix'],data['pos'],data['mode'],data['fin']);
             };
 
+            /**
+             * Algorithme décryptage : Cesar
+             *
+             * Fonction permettant de décrypter un message avec l'algorithme de Cesar
+             * Dans un premier temps, on passe une par une les lettres à leurs suivantes (a devient b, etc...)
+             * Ensuite, si nous ne trouvons pas ladetaille dans la chaine totale de caractère,
+             * on recommence la procédure précédente avec cette nouvelle chaine
+             * @param string $chaine : Le message à décrypter
+             * @param int $choix : Le début de la clé à tester
+             * @param int $pos : Le sens du décalage (1 vers la droite, -1 vers la gauche)
+             * @param int $mode : Cryptage ou Décryptage (ici Cryptage)
+             * @param int $fin : La fin de la clé à tester
+             * @return Le message chiffré, sa version dechiffré et l'utilisateur qui a décrypter le message
+             */
             function Cesar($chaine,$choix,$pos,$mode, $fin){
                 console.log($chaine);
                 console.log('choix : ' + $choix);
