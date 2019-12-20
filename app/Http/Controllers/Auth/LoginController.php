@@ -62,8 +62,10 @@ class LoginController extends Controller
         $email = $request->email;
         //$apiman = "Bearer {$this->accesstokenApi()}";
         $client = new Client();
-        $response = $client->post('http://127.0.0.1:8888/api/login', [
-            'headers' =>
+        //Code de sécurité entre client et le serveur d'authentification
+        $response = $client->post('http://127.0.0.1:8888/api/
+        login?codesecu=lecodedesecuclientserveur', [
+            'headers' => 
             [
                 //'authorization' => $apiman,
                 'content-type' => 'application/json',
@@ -71,7 +73,9 @@ class LoginController extends Controller
             'json' =>
             [
                 'email' => $email,
-                'password' => $password,
+                'password' => $password
+                //code de sécurité marche aussi ici
+                //'codesecu' => "lecodedesecuclientserveur"
             ],
         ]);
         $data = json_decode((string) $response->getBody(), true);
