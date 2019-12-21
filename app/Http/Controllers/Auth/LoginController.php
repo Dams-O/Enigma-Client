@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
@@ -63,8 +62,7 @@ class LoginController extends Controller
         //$apiman = "Bearer {$this->accesstokenApi()}";
         $client = new Client();
         //Code de sécurité entre client et le serveur d'authentification
-        $response = $client->post('http://127.0.0.1:8888/api/
-        login?codesecu=lecodedesecuclientserveur', [
+        $response = $client->post('http://127.0.0.1:8888/api/login?codesecu=lecodedesecuclientserveur', [
             'headers' => 
             [
                 //'authorization' => $apiman,
